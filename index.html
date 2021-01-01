@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>page title</title>
+
+<style> /* Definieert hoe alles er uit moet zien */
+body {
+    background-color: black;
+    overflow: hidden;
+}
+
+div#fotocolletie img {
+	max-width: 300px;
+    position: absolute;
+    transform: translateX(-50%);
+    transition: transform 0.5s;
+    top: 50%;
+}
+
+div#confirmatie button {
+    border: 3px solid black;
+    outline: 3px solid white;
+    font-size: 30px;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%)
+}
+
+div#jaofnee button {
+    border: 3px solid black;
+    outline: 3px solid white;
+    font-size: 30px;
+    padding: 20px;
+    margin:50px;
+    
+}
+
+div#confirmatie button:hover {
+    background-color: rgba(204, 204, 204, 0.933);
+}
+
+div#jaofnee button:hover {
+    background-color: rgba(204, 204, 204, 0.933);
+}
+
+
+div#jaofnee img {
+    width: 500px;
+	height: 300px;
+    position: absolute;
+    transform: translateX(-50%);
+    transition: transform 2s;
+    top: 50%;
+}
+
+div#confirmatie img {
+    width: 500px;
+	height: 300px;
+    position: absolute;
+    transform: translateX(-50%);
+    transition: transform 2s;
+    top: 50%;
+}
+
+div#popup {
+    display: inline-block;
+    position: absolute;
+    top: 0%;
+}
+
+div#popup img {
+    min-width: 300px;
+    max-width: 500px;
+    position: absolute;
+    filter: drop-shadow(15px 15px 15px black);
+    transition: transform 1s;
+    transform-origin: center center;
+    cursor: pointer;
+}
+
+div#popup img:hover {
+    outline: 10px solid red;
+    border: 10px solid black;
+}
+
+</style>
+</head>
+<body>
+
+<div id="confirmatie"> <!-- Div met de confirmatie knop -->
+    <center>
+        <button onclick="runSite()">Klik hier om de site te betreden</button>
+    </center>
+</div>
+
+
+
+<div id="echteContent" style="display:none"> <!-- Div met inhoud na de fotos -->
+    <font size="15" color="white">
+    <center>hey there wanne be my peter?</center>
+    
+</font> 
+<br>
+<font size="60" color="white">
+    <center> send me your toes</center>
+
+</font>
+<br>
+<font size="20" color="white">
+    <center> and call me maybe</center>
+
+</font>
+<br>
+<font size="20" color="white">
+    <center> +32 472 02 33 27</center>
+
+</font>
+<div id="jaofnee" style="display: none;"> <!-- Div met de confirmatie knop2 -->
+    <center>
+        <button onclick="yay()">ja</button>
+        <button id="kakzooi">nee</button>
+    </center>
+</div>
+<br>
+<br>
+<center><img src="https://i.chzbgr.com/full/9394052864/h8EF0886B/cat"</center>
+</div>
+
+<div id="popup" style="display:none">
+    <img src="https://i1.wp.com/www.onlinecomputersolution.com/wp-content/uploads/2019/02/fakewarning1.png?fit=784%2C538&ssl=1">
+    <img src="https://i.dailymail.co.uk/i/pix/2018/01/12/22/4813216800000578-5264067-image-a-14_1515794667592.jpg">
+    <img src="https://thesocietypages.org/socimages/files/2009/07/evony_ad.JPG">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRB-bd4miInzD2NCiDqJDHUL3_LKpAp-fakmg&usqp=CAU">
+    <img src="https://pbs.twimg.com/media/CXuWvTmUQAUNims.jpg">
+    <img src="https://pbs.twimg.com/media/CX0q9mWWAAAwt6H.jpg">
+</div>
+
+<div id="placeholder" style="display:none"></div>
+<script defer>
+    
+// Laat de variable "body" verwijzen naar het body element
+body = document.querySelector("body");
+
+// De delay die tussen elke achtergrondskleur verandering zit
+delay = 340;  
+
+// Lijst met alle fotos voor in de slideshow
+fotolijst = ` 
+<center>
+    <img src="https://i.ytimg.com/vi/knT5wmFnrsE/maxresdefault.jpg">
+    <img src="https://www.dumpaday.com/wp-content/uploads/2017/01/random-pictures-116.jpg">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3vZFvMcVBcc5IJwvGW8TKZDTz9Uw1yqAnMA&usqp=CAU">
+    <img src="https://images4.fanpop.com/image/photos/23300000/Er-weird-O-o-random-23398022-600-678.jpg">
+    <img src="https://qph.fs.quoracdn.net/main-qimg-c665a83ab918ff84ce0fee6f27ed8b2d.webp">
+    <img src="https://i.ytimg.com/vi/knT5wmFnrsE/maxresdefault.jpg">
+</center>
+`
+
+
+// De sleep functie die zorgt voor een delay
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+// Deze functie speelt de slideshow af 
+async function runSite(){
+
+    // Speel audio af
+    new Audio('happys.wav').play()
+    
+    // Laad de fotolijst in
+    document.querySelector("div#confirmatie").innerHTML = fotolijst;
+
+    // Zet alle fotos in een array
+    fotos = document.querySelectorAll("div#confirmatie img")
+
+    // Schuift alle fotos op naar rechts of naar links
+    for (i=0;i<fotos.length;i+=2){
+        fotos[i].style = "transform:translateX(100vw) rotate(1800deg) scale(0.5) translateY(-50%)"
+        try {
+        fotos[i+1].style = "transform:translateX(-100vw) rotate(-1800deg) scale(0.1) translateY(-50%)"
+        } catch(err){}
+    }
+
+    // Schuift alle fotos 1 per 1 met een delay terug naar het midden
+    for (i=0;i<fotos.length;i+=1) {
+        await sleep(2000)
+        try {
+        fotos[i-2].style = "transform:scale(0)";
+        } catch(err){}
+        fotos[i].style = "transform:translateX(-50%) rotate(0deg) scale(1) translateY(-50%)";
+    }
+
+    // Wacht 1 seconde na de slideshow
+    await sleep(1000)
+
+    
+    // Maak de slideshow ontzichtbaar
+    document.querySelector("div#confirmatie").style.display = "none"
+
+    // Maak de kat foto met tekst zichtbaar
+    document.querySelector("div#echteContent").style.display = "block"
+
+    // Begin met de achtergrond kleur continu te veranderen
+    kleurenpenis()
+
+    // Speel liedje ferrari af
+    new Audio('ferrari.wav').play()
+
+    await sleep(36000)
+
+    document.querySelector("div#jaofnee").style.display = "block"
+
+    
+
+  }
+  async function yay(){
+    new Audio('kids.mp3').play()
+  }
+  
+ads = document.querySelectorAll("div#popup img");
+adAantal = ads.length;
+adsClicked = 0;
+schermBreedte = window.innerWidth;
+schermHoogte = window.innerHeight;
+
+function random(min, max) { // min and max included 
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+ads.forEach(el=>{   
+    el.addEventListener("click", function( event ) {
+        el.style.display = "none"
+        ++adsClicked;
+        if (adsClicked == adAantal){
+            adsClicked = 0;
+            body = document.querySelector("body");
+        }
+    });
+})
+
+for (i in ads){
+
+
+    fotoBreedte = ads[i].width;
+    fotoHoogte = ads[i].height;
+
+    xpos = (schermBreedte/2) - (fotoBreedte/2) + (random(-10, 10)/10)*500;
+    ypos = (schermHoogte/2) - (fotoHoogte/2) + random(-150, 150);
+
+    ads[i].style = `transform: translate(${xpos}px, ${ypos}px) scale(1); display: none;`
+}
+
+  document.querySelector("button#kakzooi").addEventListener("mouseenter", function( event ) {
+      document.querySelector("div#popup").style.display = "block";
+      body.style.backgroundColor = "black";
+      body = document.querySelector("div#placeholder");
+      toonAds()
+  });
+
+  async function toonAds(){
+      for (i in ads){
+          ads[i].style.display = "inline-block"
+          await sleep(500)
+      }
+  }
+
+
+
+// Functie die de achtergrond kleur continu veranderd
+async function kleurenpenis(){
+    try {
+        body.style.backgroundColor = "red"
+        await sleep(delay)
+        body.style.backgroundColor = "blue"
+        await sleep(delay)
+        body.style.backgroundColor = "green"
+        await sleep(delay)
+        body.style.backgroundColor = "purple"
+        await sleep(delay)
+        body.style.backgroundColor = "yellow"
+        await sleep(delay)
+        body.style.backgroundColor = "orange"
+        await sleep(delay)
+        kleurenpenis() // Zorgt ervoor dat de functie oneindig opnieuw wordt doorlopen
+    } catch(err){console.log(err)}
+}
+
+
+
+</script>
+</body>
+</html>
